@@ -3,9 +3,15 @@ package com.example.lab.model;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 
+import java.util.Random;
+
 public class Position {
     private double x;
     private double y;
+
+    private int moveCounter = 0;
+    private int maxMoveCount = 100 / 25;
+
 
     public Position(double x, double y) {
         this.x = x;
@@ -33,21 +39,38 @@ public class Position {
     public void move(Heading heading, Pane world) {
         x += heading.getDx();
         y += heading.getDy();
+        Random random = new Random();
+
+        moveCounter++;
+        if (moveCounter >= maxMoveCount) {
+            // Изменение направления
+            heading.setDx(random.nextDouble() * 2 - 1); // Генерация случайной скорости по оси X от -1 до 1
+            heading.setDy(random.nextDouble() * 2 - 1); // Генерация случайной скорости по оси Y от -1 до 1
+            moveCounter = 0; // Сброс счетчика
+        }
 
         //Отвечают за чтобы люди не выходили за границы
         if (x < Person.radius || x > world.getWidth() - Person.radius) {
-            heading.bounceX();
-            x += heading.getDx();
+            if (random.nextDouble() < 0.5) {
+//                heading.bounceX();
+                x += heading.getDx();
+            }
         }
         if (y < Person.radius || y > world.getHeight() - Person.radius) {
-            heading.bounceY();
-            y += heading.getDy();
+            if (random.nextDouble() < 0.5) {
+//                heading.bounceY();
+                y += heading.getDy();
+            }
         }
     }
 
     public boolean collision(Position other) {
         return distance(other) < 2 * Person.radius;
     }
+
+
+
+
 
 
 

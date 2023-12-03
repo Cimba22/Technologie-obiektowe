@@ -10,10 +10,31 @@ public enum State {
         }
     },
 
+    HAVE_SYMPTOMS {
+        @Override
+        public Color getColor() {
+            return Color.GRAY;
+        }
+    },
+
+    HAVE_NO_SYMPTOMS {
+        @Override
+        public Color getColor() {
+            return Color.FIREBRICK;
+        }
+    },
+
     INFECTED {
         @Override
         public Color getColor() {
             return Color.RED;
+        }
+    },
+
+    IMMUNE {
+        @Override
+        public Color getColor() {
+            return Color.GOLD;
         }
     },
 
@@ -25,4 +46,5 @@ public enum State {
     };
 
     public abstract Color getColor();
+//    public abstract Probability getProbability();
 }

@@ -42,7 +42,7 @@ public class SocialSimController {
     @FXML
     public void initialize() {
         clock = new Movement();
-        world.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+//        world.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
     }
 
     @FXML
@@ -65,9 +65,12 @@ public class SocialSimController {
     @FXML
     public void step() {
         sim.move();
+        sim.getStatus();
+        sim.goInfecting();
         sim.feelBetter();
         sim.resolveCollisions(); //Вызов функции заражения
         sim.draw();
+//        sim.drawOutOfBoundary();
 
     }
 

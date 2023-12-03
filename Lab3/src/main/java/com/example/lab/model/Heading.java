@@ -1,9 +1,12 @@
 package com.example.lab.model;
 
+import java.util.Random;
+
 public class Heading {
 
-//    nie większa niż 2.5[ms/s]
-    public static final double SPEED = 2;
+    private static final Random random = new Random();
+    //    nie większa niż 2.5[ms/s]
+    public static final double SPEED = 2.5;
     private double dx;
     private double dy;
 
@@ -22,11 +25,19 @@ public class Heading {
 
 
     public double getDx() {
-        return dx;
+        return dx * SPEED;
     }
 
     public double getDy() {
-        return dy;
+        return dy * SPEED;
+    }
+
+    public void setDx(double dx) {
+        this.dx = dx;
+    }
+
+    public void setDy(double dy) {
+        this.dy = dy;
     }
 
     public void bounceX(){
